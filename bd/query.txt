@@ -1,0 +1,17 @@
+# Niveles de acceso a los usuarios y activos de Server.
+SELECT * FROM db_tickets.tbl_rol;
+
+# controlar lo que los usuarios pueden hacer en la interfaz de usuario de Server.
+SELECT * FROM db_tickets.tbl_permiso;
+
+
+SELECT * FROM db_tickets.tbl_usuario;
+
+SELECT tb1.nombre, tb1.apellido, tb1.usuario, tb1.contrasena, tb1.email, tb2.rol, tb2.nom_rol, tb3.permiso, tb3.nom_permiso
+FROM db_tickets.tbl_usuario tb1
+left JOIN db_tickets.tbl_rol tb2 ON tb1.id_rol = tb2.rol
+right JOIN db_tickets.tbl_permiso tb3 ON tb2.rol = tb3.permiso
+where tb1.usuario = 'userex';
+
+SELECT * FROM db_tickets.tbl_usuario;
+SELECT * FROM db_tickets.tbl_rol;

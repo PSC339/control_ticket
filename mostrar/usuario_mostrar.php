@@ -53,8 +53,8 @@
                         <li><a href="rol_mostrar.php">Roles</a></li>
                         <li><a href="permiso_mostrar.php"">Permisos</a></li>	
                         
-                        <li><a href="#">Otros</a></li>
-                        <li><a href="#">otros</a></li>
+                        <li><a href="#">NuevoTicket</a></li>
+                        <li><a href="#">Tecnico</a></li>
                     </ul>
                     </nav>
                 </div>
