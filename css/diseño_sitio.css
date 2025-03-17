@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: #f1f1f1;
+  }
+  
+  /* Style the header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 5px; /* ---valor anterior 20px */
+    text-align: left;
+  }
+  
+  /* Style the top navigation bar */
+  /* .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+   */
+  /* Style the topnav links */
+  /* .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  } */
+  
+  /* Change color on hover */
+  /* .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+   */
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 5px;
+    /* padding-top: 50px; */
+  }
+  
+  /* Left and right column */
+  .column.menu {
+    width: 10%;
+  }
+  
+  /* Middle column */
+  .column.formulario {
+    width: 20%;
+  }
+
+  .column.vista {
+    width: 70%;
+  }
+  
+  /* Clear floats after the columns */
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* columna contenedor medio */
+  /* .column_sub {
+    float: left;
+    padding: 10px;
+    background-color: #f1f1f1;
+  } */
+
+  /* subcolumna izquierda contenedor medio */
+  /* .column_sub.side {
+    width: 30%;
+  } */
+  
+  /* Subcolumna derecha contenedor medio */
+  /* .column_sub.middle {
+    width: 70%;
+  } */
+  
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .column.menu, .column.formulario, .column.vista {
+      width: 100%;
+    }
+  }
+
+  /* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .card_menu {
+    background-color: #696969;
+    padding: 10px;
+    margin-top: 10px;
+    color: #f1f1f1;
+  }

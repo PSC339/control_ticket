@@ -1,0 +1,53 @@
+/* Define el diseño de los botones del formulario */
+.btn {
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  /* Define el diseño de los botones de la tabla lista de registro */
+  /* .btn_a {
+    border: none; 
+    color: white; 
+    padding: 12px 28px;
+    cursor: pointer; 
+    border-radius: 5px;
+    text-decoration: none;
+  } */
+  
+  .btn-primary {background-color: #007bff;} 
+  .btn-primary:hover {background: #0b7dda;}
+  
+  .btn-secondary {background-color: #e7e7e7; color: black;} 
+  .btn-secondary:hover {background: #ddd;}
+  
+  .btn-success {background-color: #04AA6D;} 
+  .btn-success:hover {background-color: #46a049;}
+  
+  .btn-warning {background-color: #ff9800;} 
+  .btn-warning:hover {background: #e68a00;}
+  
+  .btn-danger {background-color: #f44336;} 
+  .btn-danger:hover {background: #da190b;}
+
+  .btn-block{
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* estilo en bones de accion. */
+  .btn_cancel, .btn_agregar, .btn_editar, .btn_eliminar {
+    float: left;
+    width: 50%;
+    padding: 1px;
+  }
+  
+  /* Cambia el estilo redimensionando la interfaz*/
+  @media screen and (max-width: 1200px) {
+    .btn_cancel, .btn_agregar, .btn_editar, .btn_eliminar {
+      width: 100%;
+    }
+  }

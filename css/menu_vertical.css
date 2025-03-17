@@ -1,0 +1,67 @@
+.csMenu {
+    margin: 0;
+    padding: 0;
+    display: block;	
+    font-size: 16px;    
+    overflow: hidden;
+    background-color: #696969;    
+    font-family: Arial, Helvetica, sans-serif;    
+  }
+  /* Contenedores <ul> */
+  .csMenu ul {
+    margin: 0;
+    padding: 0;
+    display: block;	    
+    list-style: none;
+  }  
+  /* Enlaces */
+  .csMenu a {
+    color: white;	
+    display: block;	    
+    padding: 0.6em 0.8em;	
+    text-decoration: none;
+  }
+  /* Enlaces hover al pasar puntero */
+  .csMenu a:hover {
+    background-color: #00BFFF;
+  }
+
+  /* Distribución vertical */
+  .mVerti li {
+    width: 10em;
+    display: block;	
+    text-align: left;
+  }
+ 
+  /* Botón tipo pantallas pequeñas */
+  #hMenuBtn {
+    display: none;	
+  }
+  /* Define el estilo reducir la interfaz */
+  @media (max-width: 768px) {
+    #hMenu {
+      display: none;
+    }
+    #hMenuBtn + label {	
+      color: white;		    
+      cursor: pointer;		
+      padding: 0 0.5em;	
+      display: inline-block;	
+    }
+
+    #hMenuBtn + label::before {
+      content: url("../img/menu-50.png");
+      font-size: 2rem;
+      line-height: 1em;
+      color: white;
+    }
+    #hMenuBtn:checked ~ #hMenu {
+      display: block;	
+    }
+  }
+
+  .mVerti a.active {
+    /* Link agrega el color definido al menu/actual */
+    background-color: #00BFFF; 
+    color: white;
+  }
