@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>How to put PHP in HTML - Simple Example</title>
-  </head>
-  <body>
-    <h1><?php
-            echo "This message is from server side."
-        ?>
-    </h1>
-  </body>
+<html lang="en">
+    <head>
+        <title>Tickets</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./css/menu_vertical.css" />
+        <link rel="stylesheet" href="./css/diseño_sitio.css">
+        <link rel="stylesheet" href="./css/formulario.css">
+        <link rel="stylesheet" href="./css/btn_tipo_alert.css">
+        <link rel="stylesheet" href="./css/tabla.css" />
+    </head>
+    <body>
+        <div class="row">
+            <div class="column_login izq_login">
+            </div>
+    
+            <div class="column_login form_login">
+                <div class="card" style="border-radius: 10px;">
+                    <center>
+                        <h2>Bienvenido</h2>
+                    </center>
+                    <hr>
+                    <form action="./login/autenticacion.php" method="POST">
+                        <label for="input_username"><b>Usuario</b></label>
+                        <input type="text" placeholder="Ingresa el usuario" name="input_username" id="input_username" required>
+                        <label for="input_pwd"><b>Contraseña</b></label>
+                        <input type="password" placeholder="Ingresa la contraseña" name="input_pwd" id="input_pwd" required>
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="btn_cancel">
+                                    <button type="reset" class="btn btn-danger btn-block">Cancelar</button>
+                                </div>
+                                <div class="btn_agregar">
+                                    <button type="submit" class="btn btn-success btn-block">Acceder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <div class="column_login der_login">
+            </div>
+        </div>
+    </body>
 </html>

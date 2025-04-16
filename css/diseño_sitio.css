@@ -7,57 +7,57 @@
     background: #f1f1f1;
   }
   
-  /* Style the header */
+  /* Estilo del header */
   .header {
     background-color: #f1f1f1;
     padding: 5px; /* ---valor anterior 20px */
     text-align: left;
   }
-  
-  /* Style the top navigation bar */
-  /* .topnav {
-    overflow: hidden;
-    background-color: #333;
-  }
-   */
-  /* Style the topnav links */
-  /* .topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  } */
-  
-  /* Change color on hover */
-  /* .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-   */
-  /* Create three unequal columns that floats next to each other */
+
+  /* Crea tres columnas desiguales que floten una al lado de la otra para la interfaz despues de la auntenticacion. */
   .column {
     float: left;
     padding: 5px;
     /* padding-top: 50px; */
   }
   
-  /* Left and right column */
+  /* Columna menu */
   .column.menu {
     width: 10%;
   }
   
-  /* Middle column */
+  /* Columna formulario */
   .column.formulario {
     width: 20%;
   }
 
+  /* Columna tabla */
   .column.vista {
     width: 70%;
   }
+
+  /* Crea tres columnas desiguales que floten una al lado de la otra para la interfaz auntenticacion. */
+  .column_login {
+    float: left;
+    padding-top: 10%;
+    /* padding-top: 50px; */
+  }
   
-  /* Clear floats after the columns */
+  /* Columna izquierda sin articulo. */
+  .column_login.izq_login {
+    width: 35%;
+  }
+  
+  /* Columna formulario */
+  .column_login.form_login {
+    width: 30%;
+  }
+
+  .column_login.der_login {
+    width: 35%;
+  }
+  
+  /* Elimina los flotadores despues de las coulmnas */
   .row::after {
     content: "";
     display: table;
@@ -81,14 +81,14 @@
     width: 70%;
   } */
   
-  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  /* Diseño adaptable: las tres columnas se apilan una encima de otra en lugar de una al lado de la otra. */
   @media screen and (max-width: 800px) {
-    .column.menu, .column.formulario, .column.vista {
+    .column.menu, .column.formulario, .column.vista, .buscar-dato {
       width: 100%;
     }
   }
 
-  /* Add a card effect for articles */
+  /* Añade un efecto de tarjeta para los modulos. */
 .card {
     background-color: white;
     padding: 10px;
@@ -101,3 +101,20 @@
     margin-top: 10px;
     color: #f1f1f1;
   }
+
+  /* Definino la posicion del input, btn de la busqueda */
+  .titulo-lista{
+    display: inline-block;
+  }
+  .buscar-dato{
+    display: inline-block;
+    float: right;
+  }
+  .buscar-input{
+    display: inline-block;
+  }
+
+  .buscar-btn{
+    display: inline-block;
+  }
+  

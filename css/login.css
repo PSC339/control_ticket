@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: #f1f1f1;
+  }
+  
+  /* Estilo del header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 5px; /* ---valor anterior 20px */
+    text-align: left;
+  }
+  
+  /* Crea tres columnas desiguales que floten una al lado de la otra */
+  .columna_login {
+    float: left;
+    padding-top: 10%;
+    /* padding-top: 50px; */
+  }
+  
+  /* Columna izquierda sin articulo. */
+  .column.izq_login {
+    width: 35%;
+  }
+  
+  /* Columna formulario */
+  .column.form_login {
+    width: 30%;
+  }
+
+  .column.der_login {
+    width: 35%;
+  }
+  
+  /* Elimina los flotadores despues de las coulmnas */
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Añade un efecto de tarjeta para los modulos. */
+.card {
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .card_menu {
+    background-color: #696969;
+    padding: 10px;
+    margin-top: 10px;
+    color: #f1f1f1;
+  }

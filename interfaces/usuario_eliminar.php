@@ -7,7 +7,8 @@
 
     // print_r($_GET);
     // Aplico la instruccion de eliminado...
-    $sql_delete = "DELETE FROM db_tickets.tbl_usuario WHERE id_usuario = '$id_usuario'";
+    // $sql_delete = "DELETE FROM db_tickets.tbl_usuario WHERE id_usuario = '$id_usuario'";
+    $sql_delete = "UPDATE db_tickets.tbl_usuario SET is_active = 0 WHERE id_usuario = '$id_usuario'";
     mysqli_query($conn, $sql_delete);
     mysqli_close($conn);
 

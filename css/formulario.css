@@ -1,13 +1,15 @@
 /* * {box-sizing: border-box} */
 
-/* Full-width input fields */
-  input[type=text], input[type=password] {
+/* Define  */
+  input[type=text], input[type=password], select, textarea {
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  padding: 12px; /*Valor origen 15px*/
+  margin: 5px 0 10px 0;
   display: inline-block;
-  border: none;
+  /* border: none; */
+  border: 1px solid #ccc;
   background: #f1f1f1;
+  border-radius: 4px;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -18,6 +20,11 @@ input[type=text]:focus, input[type=password]:focus {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+}
+
+textarea {
+  font-size: 14px;
+  resize: none;
 }
 
 /* Set a style for all buttons */
@@ -67,3 +74,4 @@ hr {
     width: 100%;
   }
 } */
+ 

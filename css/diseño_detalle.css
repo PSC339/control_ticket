@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: #f1f1f1;
+  }
+  
+  /* Estilo del header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 5px; /* ---valor anterior 20px */
+    text-align: left;
+  }
+
+  /* Crea tres columnas desiguales que floten una al lado de la otra para la interfaz despues de la auntenticacion. */
+  .column {
+    float: left;
+    padding: 5px;
+    /* padding-top: 50px; */
+  }
+  
+  /* Columna menu */
+  .column.menu {
+    width: 50%;
+  }
+  
+  /* Columna formulario */
+  .column.formulario {
+    width: 50%;
+  }
+
+  /* Columna tabla */
+  .column.vista {
+    width: 100%;
+  }
+
+  /* Crea tres columnas desiguales que floten una al lado de la otra para la interfaz despues de la auntenticacion. */
+  .col {
+    float: left;
+    padding: 5px;
+    /* padding-top: 50px; */
+  }
+  
+  /* Columna menu */
+  .col.menu-detail {
+    width: 10%;
+  }
+  
+  /* Columna formulario */
+  /* .column.formulario {
+    width: 50%;
+  } */
+
+  /* Columna tabla */
+  .col.vista-detail {
+    width: 90%;
+  }
+
+  .lbl_details{
+    font-size: 26px;
+    font-weight: bold;
+    padding: 5px;
+  }
+
+  .sp_detail{
+    font-size: 22px;
+    /* font-weight: bold; */
+  }
+
+  /* .a-retorno{
+    padding: 8px;
+    float: right;
+    font-size: 22px;
+    color: black;
+  } */
+
+  .btns-ticket{
+    float: right;
+  }
+  .export, .retorno{
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  /* Elimina los flotadores despues de las coulmnas */
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Diseño adaptable: las tres columnas se apilan una encima de otra en lugar de una al lado de la otra. */
+  @media screen and (max-width: 800px) {
+    .column.menu, .column.formulario, .column.vista {
+      width: 100%;
+    }
+  }
+
+  /* Añade un efecto de tarjeta para los modulos. */
+.card {
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+
+  .card_menu {
+    background-color: #696969;
+    padding: 10px;
+    margin-top: 10px;
+    color: #f1f1f1;
+    /* border-radius: 10px; */
+  }
+
+   /* Definino la posicion del input, btn de la busqueda */
+  .titulo-lista{
+    display: inline-block;
+  }
+  
+  .buscar-dato{
+    /* display: inline-block; */
+    float: right;
+  }
+  .buscar-input, .buscar-btn{
+    display: inline-block;
+  }
+
+.no-iniciado {
+    background-color: #A4A4A4;
+    color: #f1f1f1;
+    padding: 4px;
+    border-radius: 6px;
+}
+.en-verificacion {
+    background-color: #00BFFF;
+    color: #f1f1f1;
+    padding: 4px;
+    border-radius: 6px;
+}
+.finalizado {
+    background-color: #28b463 ;
+    color: white;
+    padding: 4px;
+    border-radius: 6px;
+}

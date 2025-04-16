@@ -1,9 +1,8 @@
 <?php
 require '../config/conexion.php';
-	$var_cargado = $_POST;
-    var_dump($var_cargado);
+	// $var_cargado = $_POST;
+    // var_dump($var_cargado);
 	$id_rol = $_POST['id_rol'];
-	$varrol = $_POST['input_rol'];
 	$varnombre = $_POST['input_nombre'];
 	// $estado_civil = $_POST['estado_civil'];
 	// $hijos = isset($_POST['hijos']) ? $_POST['hijos'] : 0;
@@ -24,7 +23,7 @@ require '../config/conexion.php';
 	// 	}
 	// }
 	
-	$sql_editar = "UPDATE db_tickets.tbl_rol SET rol='$varrol', nom_rol='$varnombre' WHERE id_rol = '$id_rol'";
+	$sql_editar = "UPDATE db_tickets.tbl_rol SET nom_rol='$varnombre', editado = now() WHERE id_rol = '$id_rol'";
     //var_dump($sql_editar);
     mysqli_query($conn,$sql_editar);
     mysqli_close($conn);

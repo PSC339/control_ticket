@@ -3,7 +3,7 @@ require '../config/conexion.php';
 	// $var_cargado = $_POST;
     // var_dump($var_cargado);
 	$id_usuario = $_POST['id_usuario'];
-	$varrol = $_POST['input_rol'];
+	$varrol = $_POST['sb_rol'];
 	$varnombre = $_POST['input_nombre'];
 	$varapellido = $_POST['input_apellido'];
     $varusuario = $_POST['input_usuario'];

@@ -1,3 +1,12 @@
+<?php
+// confirmar sesion
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: ../index.html');
+    exit;
+}
+require "../login/verifica_permiso.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,11 +19,13 @@
         <link rel="stylesheet" href="../css/formulario.css">
         <link rel="stylesheet" href="../css/btn_tipo_alert.css">
         <link rel="stylesheet" href="../css/tabla.css" />
+        <link rel="stylesheet" href="../css/menu_sesion.css" />
     </head>
     <body>
         <?php
             // conectamos la bd
             require "../config/conexion.php";
+            $regBuscar = '';
             //print_r($_GET);
             $var_recibido = isset($_GET['idPermiso']) ? $_GET['idPermiso'] : '0';
 
@@ -25,39 +36,54 @@
                 $resultado = $conn->query($sql);
                 $fila_id = $resultado->fetch_array(MYSQLI_ASSOC);
             }
-            
-            
-            //var_dump($fila_id);
+
+            // Valido si el input viene null si es null le asigno un 0.
+            $varBuscar = !empty($_GET['busqueda']) ? $_GET['busqueda'] : '0';
+            if ($varBuscar != 0) {
+                $regBuscar = $_GET['busqueda'];
+                // var_dump("Nombre recibido: ".$regBuscar);
+            }
         ?>
         <div class="header">
             <div class="card_menu">
+                <div class="btn_logout">
+                    <div class="dropdown">
+                        <button class="dropbtn">Usuario: <b><?= $_SESSION['name_user'] ?></b></button>
+                        <div class="dropdown-content">
+                            <a href="../login/cerrar_session.php">Salir</a>
+                        </div>
+                    </div>
+                </div>
                 <h2>Tickets</h2>
-                <!-- <p>Tickets</p> -->
             </div>
         </div>
-
-        <!-- <div class="topnav">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-        </div> -->
 
         <div class="row">
             <div class="column menu">
                 <div class="card_menu">
-                    <h2>Panel</h2>
+                    <h4>Menu: <b><?= $_SESSION['rol'] ?></b></h4>
                     <hr>
                     <nav class="csMenu">
                         <input id="hMenuBtn" type="checkbox" />
                         <label for="hMenuBtn"></label>
                         <ul id="hMenu" class="mVerti">
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="usuario_mostrar.php">Usuarios</a></li>
-                            <li><a href="rol_mostrar.php">Roles</a></li>
-                            <li><a href="permiso_mostrar.php" class="active">Permisos</a></li>	
-                            
-                            <li><a href="#">Otros</a></li>
-                            <li><a href="#">otros</a></li>
+                            <?php if($_SESSION['rol']=='Administrador') { ?>
+                                <li><a href="usuario_mostrar.php">Usuarios</a></li>
+                                <li><a href="rol_permiso_vista.php">Asignacion</a></li>
+                                <li><a href="rol_mostrar.php">Roles</a></li>
+                                <li><a href="permiso_mostrar.php" class="active">Permisos</a></li>
+                                <li><a href="ticketsValidacion_vista.php">Técnicos</a></li>
+                                <li><a href="ticketsCerrados_vista.php">Cerrados</a></li>
+                                <li><a href="tickets_vista.php">Tickets</a></li>
+                            <?php } ?>
+                            <?php if ($_SESSION['rol']=='Tecnico') { ?>
+                                <li><a href="ticketsValidacion_vista.php">Técnicos</a></li>
+                                <li><a href="ticketsCerrados_vista.php">Cerrados</a></li>
+                            <?php } ?>
+                            <?php if ($_SESSION['rol']=='Empleado') { ?>
+                                <li><a href="tickets_vista.php">Tickets</a></li>
+                                <!-- <li><a href="#">Técnico</a></li> -->
+                            <?php } ?>
                         </ul>
                     </nav>
                 </div>
@@ -65,90 +91,115 @@
     
             <div class="column formulario">
                 <!-- <div class="row"> -->
-                    <div class="card">
-                        <?php if ($var_recibido == 0) { ?>
-                            <h2>Nuevo Permiso</h2>
-                        <hr>
-                        <form action="permiso_agregar.php" method="POST">
-                            <label for="input_permiso"><b>Permiso</b></label>
-                            <input type="text" placeholder="Ingresa permiso" name="input_permiso" id="input_permiso" required>
-                            <label for="input_nombre"><b>Nombre</b></label>
-                            <input type="text" placeholder="Ingresa nombre permiso" name="input_nombre" id="input_nombre" required>
-                            <div class="clearfix">
-                                <div>
-                                    <div class="btn_cancel">
-                                        <button type="reset" class="btn btn-danger btn-block">Cancelar</button>
-                                    </div>
-                                    <div class="btn_agregar">
+                <div class="card">
+                    <?php if ($var_recibido == 0) { ?>
+                        <h2>Nuevo Permiso</h2>
+                    <hr>
+                    <form action="permiso_agregar.php" method="POST">
+                        <label for="input_nombre"><b>Permiso</b></label>
+                        <input type="text" placeholder="Ingresa nuevo permiso" name="input_nombre" id="input_nombre" required>
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="btn_cancel">
+                                    <button type="reset" class="btn btn-danger btn-block">Cancelar</button>
+                                </div>
+                                <div class="btn_agregar">
+                                    <?php if (tiene_permiso('Agregar')) { ?>
                                         <button type="submit" class="btn btn-success btn-block">Agregar</button>
-                                    </div>.
+                                    <?php } else { ?>
+                                        <button type="button" class="btn btn-success btn-block" onClick="permiso();">Agregar</button>
+                                    <?php } ?>
                                 </div>
                             </div>
-                        </form>
-                        <?php } else { ?>
-                        <h2>Modificar Permiso</h2>
-                        <hr>
-                        <form action="permiso_editar.php" method="POST">
-                            <label for="input_permiso"><b>Permiso</b></label>
-                            <input type="text" placeholder="Ingresa permiso" name="input_permiso" id="input_permiso" value="<?php echo $fila_id['permiso']; ?>" required>
-                            <input type="hidden"  name="id_permiso" value="<?php echo $fila_id['id_permiso']; ?>" />
-                            <label for="input_nombre"><b>Nombre</b></label>
-                            <input type="text" placeholder="Ingresa nombre permiso" name="input_nombre" id="input_nombre" value="<?php echo $fila_id['nom_permiso']; ?>" required>
-                            <div class="clearfix">
-                                <div>
-                                    <div class="btn_cancel">
-                                        <button type="reset" class="btn btn-danger btn-block">Cancel</button>
-                                    </div>
-                                    <div class="btn_agregar">
-                                        <button type="submit" class="btn btn-success btn-block">Editar</button>
-                                    </div>.
+                        </div>
+                    </form>
+                    <?php } else { ?>
+
+                    <h2>Modificar Permiso</h2>
+                    <hr>
+                    <form action="permiso_editar.php" method="POST">
+                        <label for="input_nombre"><b>Nombre</b></label>
+                        <input type="text" placeholder="Ingresa nombre permiso" name="input_nombre" id="input_nombre" value="<?php echo $fila_id['nom_permiso']; ?>" required>
+                        <input type="hidden"  name="id_permiso" value="<?php echo $fila_id['id_permiso']; ?>" />
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="btn_cancel">
+                                    <button type="reset" class="btn btn-danger btn-block">Cancel</button>
+                                </div>
+                                <div class="btn_agregar">
+                                    <button type="submit" class="btn btn-success btn-block">Editar</button>
                                 </div>
                             </div>
-                        </form>
-                        <?php } ?>
-                        
-                    </div>
+                        </div>
+                    </form>
+                    <?php } ?>
+                    
+                </div>
                 <!-- </div> -->
             </div>
     
             <div class="column vista">
-            <div class="card">
-                            <h2>Lista Permisos</h2>
-                            <hr>
-                            <?php
-                            $sql = "SELECT * FROM db_tickets.tbl_permiso WHERE is_active=1;";
-                            $result = $conn->query($sql);
-                            //var_dump($result);
-                            ?>
-                            <!--se despliega el resultado -->
-                            <body>
-                                <div style="overflow-x: auto;">
-                                    <table>  
-                                        <thead>
+                <div class="card">
+                    <div class="titulo-lista">
+                        <h2 >Lista Catalogo Permisos</h2>
+                    </div>
+                    <div class="buscar-dato">
+                        <form method="GET" action="permiso_mostrar.php" >
+                            <div class="buscar-input">
+                                <input type="text" name="busqueda" placeholder="Busqueda permiso..." title="Mostrar todos los registros campo vacio">
+                            </div>
+                            <div class="buscar-btn">
+                                <button type="submit" class="btn btn-primary btn-block" >Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <?php
+                    $sql = "SELECT * FROM db_tickets.tbl_permiso
+                    WHERE IF('$varBuscar' = '', nom_permiso = 0,nom_permiso LIKE '%$regBuscar%')
+                    AND is_active = 1;";
+                    $result = $conn->query($sql);
+                    // var_dump($sql);
+                    ?>
+                    <!--se despliega el resultado -->
+                    <body>
+                        <div style="overflow-x: auto;">
+                            <table>  
+                                <thead>
+                                <tr>
+                                <th scope='col'>Permiso</th>
+                                <th scope='col'>Creado</th>
+                                <th scope='col'>Editado</th> 
+                                <th scope='col'><center>Accion</center></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($fila = $result->fetch_assoc()) { ?>
                                         <tr>
-                                        <th scope='col'>Permiso</th> 
-                                        <th scope='col'>Nombre</th> 
-                                        <th scope='col'><center>Accion</center></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php while ($fila = $result->fetch_assoc()) { ?>
-                                                <tr>
-                                                <td><?php echo $fila['permiso']; ?></td>
-                                                <td><?php echo $fila['nom_permiso']; ?></td>
-                                                <td>
-                                                    <center>
-                                                        <a href="permiso_mostrar.php?idPermiso=<?php echo $fila['id_permiso']; ?>"><img src="../img/pencil_24.png" alt="modificar" title="Modificar"></a>
-                                                        <a href="permiso_eliminar.php?idPermiso=<?php echo $fila['id_permiso']; ?>"><img src="../img/trash_24.png" alt="eliminar" title="Eliminar"></a>
-                                                    </center>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </body>
+                                        <td><?php echo $fila['nom_permiso']; ?></td>
+                                        <td><?php echo $fila['created_at']; ?></td>
+                                        <td><?php echo $fila['editado']; ?></td>
+                                        <td>
+                                            <center>
+                                                <?php if (tiene_permiso('Modificar')) { ?>
+                                                    <a href="permiso_mostrar.php?idPermiso=<?php echo $fila['id_permiso']; ?>"><img src="../img/pencil_24.png" alt="modificar" title="Modificar"></a>
+                                                <?php } else { ?>
+                                                    <a onclick="permiso();"><img src="../img/pencil_24.png" alt="modificar" title="Modificar"></a>
+                                                <?php } ?>
+                                                <?php if (tiene_permiso('Eliminar')) { ?>
+                                                    <a href="permiso_eliminar.php?idPermiso=<?php echo $fila['id_permiso']; ?>"><img src="../img/trash_24.png" alt="eliminar" title="Eliminar"></a>
+                                                <?php } else { ?>
+                                                    <a onclick="permiso();"><img src="../img/trash_24.png" alt="modificar" title="Modificar"></a>
+                                                <?php } ?>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
+                    </body>
+                </div>
             </div>
         </div>
     

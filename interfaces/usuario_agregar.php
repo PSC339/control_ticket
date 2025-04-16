@@ -8,7 +8,7 @@ require "../config/conexion.php";
 // insertar($conn);
 
 // function insertar($conn){
-    $var_rol = $_POST['input_rol'];
+    $var_rol = $_POST['sb_rol'];
     $var_nombre = $_POST['input_nombre'];
     $var_apellido = $_POST['input_apellido'];
     $var_usuario = $_POST['input_usuario'];
